@@ -15,6 +15,8 @@ import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.utils.Constants;
 import com.example.jobfinderapp.viewmodel.DetailViewModel;
 
+import java.text.SimpleDateFormat;
+
 public class DetailActivity extends BaseActivity {
     private ActivityDetailBinding binding;
     private DetailViewModel detailViewModel;
@@ -49,7 +51,8 @@ public class DetailActivity extends BaseActivity {
                 binding.companyName.setText(result.getCompany().getDisplayName());
                 binding.location.setText(result.getLocation().getDisplayName());
                 binding.salary.setText((int) result.getSalaryMin() + " / " + (int) result.getSalaryMax());
-                binding.createdText.setText(result.getCreated().toString());
+                String created = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(result.getCreated());
+                binding.createdText.setText(created);
                 binding.isFullTime.setText(result.getContractTime());
                 binding.description.setText(result.getDescription());
             }
