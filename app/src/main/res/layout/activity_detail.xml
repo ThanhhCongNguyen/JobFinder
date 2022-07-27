@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    tools:context=".ui.activity.DetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Senior"
+        app:titleTextColor="@color/white" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/item_recommended_background"
+        app:layout_constraintBottom_toBottomOf="@id/parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/subConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_right_left_conner">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:background="@color/grey"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/subConstraint" />
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:gravity="center"
+                android:text="Title"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/extraExtraLargeText"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/view"
+                app:layout_constraintStart_toStartOf="@id/view"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:text="Company Name"
+                android:textSize="@dimen/extraLargeText"
+                app:layout_constraintEnd_toEndOf="@id/title"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <TextView
+                android:id="@+id/isFullTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:background="@drawable/full_time_background"
+                android:paddingStart="@dimen/extraSpace"
+                android:paddingEnd="@dimen/extraSpace"
+                android:text="Full time"
+                app:layout_constraintEnd_toEndOf="@id/companyName"
+                app:layout_constraintStart_toStartOf="@+id/companyName"
+                app:layout_constraintTop_toBottomOf="@id/companyName" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                app:cardCornerRadius="@dimen/mediumRadius"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toBottomOf="@id/isFullTime">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/extraSpace"
+                        android:layout_marginTop="@dimen/extraSpace"
+                        android:text="Information"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/largeText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/extraSpace"
+                        android:layout_marginTop="@dimen/extraSpace"
+                        android:drawableStart="@drawable/ic_location"
+                        android:drawablePadding="@dimen/extraSpace"
+                        android:gravity="center_vertical"
+                        android:text="HaNoi" />
+
+                    <TextView
+                        android:id="@+id/salary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/extraSpace"
+                        android:layout_marginTop="@dimen/mediumSpace"
+                        android:drawableStart="@drawable/ic_money"
+                        android:drawablePadding="@dimen/extraSpace"
+                        android:gravity="center_vertical"
+                        android:text="100"
+                        android:textSize="@dimen/extraSpace" />
+
+                    <TextView
+                        android:id="@+id/createdText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/extraSpace"
+                        android:layout_marginTop="@dimen/mediumSpace"
+                        android:drawableStart="@drawable/ic_time"
+                        android:drawablePadding="@dimen/extraSpace"
+                        android:gravity="center_vertical"
+                        android:text="2022" />
+
+
+                    <TextView
+                        android:id="@+id/jobDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/extraSpace"
+                        android:layout_marginTop="@dimen/extraSpace"
+                        android:text="Job Description"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/largeText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/largeSpace"
+                        android:layout_marginTop="@dimen/extraSpace"
+                        android:layout_marginEnd="@dimen/extraSpace"
+                        android:layout_marginBottom="@dimen/extraSpace"
+                        android:text="..."
+                        android:textSize="@dimen/largeText" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/largeSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:layout_marginEnd="@dimen/largeSpace"
+                android:layout_marginBottom="@dimen/extraSpace"
+                android:background="@drawable/apply_background"
+                android:text="Apply Now"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@id/subConstraint"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

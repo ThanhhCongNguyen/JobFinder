@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/mediumSpace"
+    android:layout_marginTop="@dimen/mediumSpace"
+    android:layout_marginEnd="@dimen/mediumSpace"
+    android:background="@drawable/item_recommended_background"
+    app:cardCornerRadius="@dimen/extraRadius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/constraint"
+        app:layout_constraintEnd_toEndOf="@id/constraint"
+        app:layout_constraintStart_toStartOf="@id/constraint"
+        app:layout_constraintTop_toTopOf="@id/constraint">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/extraSpace"
+            android:layout_marginTop="@dimen/extraSpace"
+            android:layout_marginEnd="@dimen/extraSpace"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/senior_api"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/extraLargeText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/save"
+            app:layout_constraintStart_toStartOf="@id/parent"
+            app:layout_constraintTop_toTopOf="@id/parent" />
+
+        <TextView
+            android:id="@+id/companyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mediumSpace"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:drawableStart="@drawable/ic_apartment"
+            android:drawablePadding="@dimen/mediumSpace"
+            android:gravity="center_vertical"
+            android:text="Amazon"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="@dimen/mediumSpace"
+            android:gravity="center_vertical"
+            android:text="America"
+            app:layout_constraintStart_toStartOf="@id/companyName"
+            app:layout_constraintTop_toBottomOf="@id/companyName" />
+
+        <TextView
+            android:id="@+id/fullTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_marginBottom="@dimen/mediumSpace"
+            android:background="@drawable/full_time_background"
+            android:padding="@dimen/smallSpace"
+            android:paddingStart="@dimen/extraSpace"
+            android:paddingEnd="@dimen/extraSpace"
+            android:text="Full time"
+            android:textSize="@dimen/extraSmallText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/location"
+            app:layout_constraintTop_toBottomOf="@id/location" />
+
+        <TextView
+            android:id="@+id/createdText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/extraSpace"
+            app:layout_constraintBottom_toBottomOf="@id/fullTimeText"
+            app:layout_constraintEnd_toEndOf="@id/parent"
+            app:layout_constraintTop_toTopOf="@id/fullTimeText" />
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/extraSpace"
+            android:src="@drawable/ic_save"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

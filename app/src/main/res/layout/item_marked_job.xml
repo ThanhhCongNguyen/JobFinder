@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/extraSpace"
+    android:layout_marginTop="@dimen/extraSpace"
+    android:background="@drawable/item_recommended_background">
+
+    <TextView
+        android:id="@+id/companyName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:drawableStart="@drawable/ic_apartment"
+        android:drawablePadding="@dimen/mediumSpace"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="company"
+        android:textSize="@dimen/largeText"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintStart_toStartOf="@id/parent"
+        app:layout_constraintTop_toTopOf="@id/parent" />
+
+    <TextView
+        android:id="@+id/jobName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/mediumSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Job Name"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/extraLargeText"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/parent"
+        app:layout_constraintStart_toStartOf="@id/parent"
+        app:layout_constraintTop_toBottomOf="@id/companyName" />
+
+    <TextView
+        android:id="@+id/salary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mediumSpace"
+        android:layout_marginTop="@dimen/mediumSpace"
+        android:drawableStart="@drawable/ic_money"
+        android:drawablePadding="@dimen/mediumSpace"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/jobName"
+        app:layout_constraintTop_toBottomOf="@id/jobName" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mediumSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:layout_marginBottom="@dimen/extraSpace"
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="@dimen/mediumSpace"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="HaNoi"
+        app:layout_constraintBottom_toBottomOf="@id/parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/salary"
+        app:layout_constraintTop_toBottomOf="@id/salary" />
+
+    <ImageView
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:src="@drawable/ic_save_blue"
+        app:layout_constraintBottom_toBottomOf="@id/companyName"
+        app:layout_constraintEnd_toEndOf="@id/parent"
+        app:layout_constraintTop_toTopOf="@id/companyName" />
+</androidx.constraintlayout.widget.ConstraintLayout>
