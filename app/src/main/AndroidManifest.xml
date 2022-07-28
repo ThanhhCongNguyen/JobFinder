@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JobFinderApp">
         <activity
+            android:name=".ui.activity.AllMarkerJobActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.SplashActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.activity.DetailActivity"
             android:exported="false" />

@@ -4,6 +4,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,11 +13,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.jobfinderapp.R;
 import com.example.jobfinderapp.databinding.ActivityAllJobBinding;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 import com.example.jobfinderapp.ui.adapter.AllJobAdapter;
 import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.utils.Constants;
-import com.example.jobfinderapp.utils.PaginationScrollListener;
 import com.example.jobfinderapp.utils.Utility;
 import com.example.jobfinderapp.viewmodel.AllJobViewModel;
 
@@ -23,7 +24,6 @@ public class AllJobActivity extends BaseActivity {
     private ActivityAllJobBinding binding;
     private AllJobAdapter allJobAdapter;
     private AllJobViewModel allJobViewModel;
-    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,26 +31,10 @@ public class AllJobActivity extends BaseActivity {
         binding = ActivityAllJobBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        binding.toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        initToolBar();
 
         allJobViewModel = new ViewModelProvider(this).get(AllJobViewModel.class);
         allJobViewModel.initRepository(getApplicationContext());
-
-        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.swipeRefreshLayout.setRefreshing(false);
-                        observeDataChanged();
-                    }
-                }, Constants.DELAY_MILLIS);
-            }
-        });
 
         binding.shimmerLayout.startShimmer();
 
@@ -61,48 +45,52 @@ public class AllJobActivity extends BaseActivity {
             }
 
             @Override
-            public void saveJob(Result result) {
+            public void saveJob(Result result, View view) {
                 executor.execute(() -> allJobViewModel.insert(result));
-                Utility.toast(getApplicationContext(), "Insert successfully");
+                Utility.snackBar(getApplicationContext(), binding.getRoot(), "Inserted successfully");
             }
         });
-        linearLayoutManager = new LinearLayoutManager(this);
 
         setUpRecyclerView();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                observeDataChanged();
-            }
-        }, Constants.DELAY_MILLIS);
+        observeDataChanged(allJobViewModel.getCurrentPage());
 
-        binding.recyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, allJobViewModel.getPages());
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            protected void loadMoreItems() {
-                allJobViewModel.setLoading(true);
-                allJobViewModel.setCurrentPage();
-                loadNextPage();
-            }
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                binding.recyclerView.setVisibility(View.GONE);
+                binding.shimmerLayout.setVisibility(View.VISIBLE);
+                binding.shimmerLayout.startShimmer();
 
-            @Override
-            public boolean isLastPage() {
-                return allJobViewModel.getLastPage();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        observeDataChanged(String.valueOf(i));
+                    }
+                }, Constants.DELAY_MILLIS);
             }
 
             @Override
-            public boolean isLoading() {
-                return allJobViewModel.getLoading();
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+        binding.spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     private void setUpRecyclerView() {
         binding.recyclerView.setAdapter(allJobAdapter);
-        binding.recyclerView.setLayoutManager(linearLayoutManager);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void observeDataChanged() {
-        allJobViewModel.getJobByPage(String.valueOf(allJobViewModel.getCurrentPage()), Constants.APP_ID, Constants.APP_KEY).observe(this, job -> {
+    private void observeDataChanged(String page) {
+        allJobViewModel.getJobByPage(page, Constants.APP_ID, Constants.APP_KEY).observe(this, job -> {
             if (job == null) {
                 return;
             }
@@ -110,30 +98,14 @@ public class AllJobActivity extends BaseActivity {
 
             binding.shimmerLayout.stopShimmer();
             binding.shimmerLayout.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
         });
     }
 
-    private void loadNextPage() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                allJobAdapter.removeLoadingFooter();
-                allJobViewModel.setLoading(false);
-
-                allJobViewModel.getJobByPage(String.valueOf(allJobViewModel.getCurrentPage()), Constants.APP_ID, Constants.APP_KEY).observe(AllJobActivity.this, job -> {
-                    if (job == null) {
-                        return;
-                    }
-                    allJobAdapter.setResults(job.getResults());
-                });
-                allJobAdapter.addLoadingFooter();
-            }
-        }, Constants.DELAY_MILLIS);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
+    private void initToolBar() {
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        binding.toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 }

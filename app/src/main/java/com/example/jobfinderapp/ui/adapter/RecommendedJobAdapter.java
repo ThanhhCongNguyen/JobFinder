@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jobfinderapp.databinding.ItemRecommendedJobBinding;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,10 +53,6 @@ public class RecommendedJobAdapter extends RecyclerView.Adapter<RecommendedJobAd
             holder.itemView.setOnClickListener(view -> {
                 callback.onItemClick(result);
             });
-
-            holder.binding.save.setOnClickListener(view -> {
-                callback.saveJob(result);
-            });
         }
     }
 
@@ -76,7 +72,5 @@ public class RecommendedJobAdapter extends RecyclerView.Adapter<RecommendedJobAd
 
     public interface Callback {
         void onItemClick(Result result);
-
-        void saveJob(Result result);
     }
 }

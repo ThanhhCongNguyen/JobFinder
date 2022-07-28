@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jobfinderapp.databinding.ItemMarkedJobBinding;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,12 @@ public class MarkerJobAdapter extends RecyclerView.Adapter<MarkerJobAdapter.Mark
         notifyDataSetChanged();
     }
 
+    public void deleteItem(Result result, int position) {
+        callback.deleteItem(result, position);
+        results.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @NonNull
     @Override
     public MarkedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,11 +46,16 @@ public class MarkerJobAdapter extends RecyclerView.Adapter<MarkerJobAdapter.Mark
         if (result != null) {
             holder.binding.jobName.setText(result.getTitle());
             holder.binding.companyName.setText(result.getCompany().getDisplayName());
-            holder.binding.salary.setText((int)result.getSalaryMin() + " / " + (int)result.getSalaryMax());
+            holder.binding.salary.setText((int) result.getSalaryMin() + " / " + (int) result.getSalaryMax());
             holder.binding.location.setText(result.getLocation().getDisplayName());
 
             holder.itemView.setOnClickListener(view -> {
                 callback.onItemClick(result);
+            });
+
+            holder.itemView.setOnLongClickListener(view -> {
+                callback.deleteItem(result, position);
+                return false;
             });
         } else return;
     }
@@ -67,12 +78,6 @@ public class MarkerJobAdapter extends RecyclerView.Adapter<MarkerJobAdapter.Mark
         void onItemClick(Result result);
 
         void deleteItem(Result result, int position);
-    }
-
-    public void deleteItem(Result result, int position) {
-        callback.deleteItem(result, position);
-        results.remove(position);
-        notifyItemRemoved(position);
     }
 
     public static class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

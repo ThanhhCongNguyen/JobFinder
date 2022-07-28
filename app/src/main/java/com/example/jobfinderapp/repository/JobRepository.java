@@ -5,12 +5,12 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.jobfinderapp.repository.database.local.dao.JobDao;
-import com.example.jobfinderapp.repository.database.local.db.JobDatabase;
-import com.example.jobfinderapp.repository.database.local.entity.Job;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
-import com.example.jobfinderapp.repository.database.remote.ApiInterface;
-import com.example.jobfinderapp.repository.database.remote.RetrofitInstance;
+import com.example.jobfinderapp.repository.local.dao.JobDao;
+import com.example.jobfinderapp.repository.local.db.JobDatabase;
+import com.example.jobfinderapp.repository.local.entity.Job;
+import com.example.jobfinderapp.repository.local.entity.Result;
+import com.example.jobfinderapp.repository.remote.ApiInterface;
+import com.example.jobfinderapp.repository.remote.RetrofitInstance;
 
 import java.util.List;
 

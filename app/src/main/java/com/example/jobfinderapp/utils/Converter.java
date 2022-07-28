@@ -2,9 +2,9 @@ package com.example.jobfinderapp.utils;
 
 import androidx.room.TypeConverter;
 
-import com.example.jobfinderapp.repository.database.local.entity.Category;
-import com.example.jobfinderapp.repository.database.local.entity.Company;
-import com.example.jobfinderapp.repository.database.local.entity.Location;
+import com.example.jobfinderapp.repository.local.entity.Category;
+import com.example.jobfinderapp.repository.local.entity.Company;
+import com.example.jobfinderapp.repository.local.entity.Location;
 import com.google.gson.Gson;
 
 import java.util.Date;

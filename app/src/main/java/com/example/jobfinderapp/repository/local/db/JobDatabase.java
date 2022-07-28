@@ -1,4 +1,4 @@
-package com.example.jobfinderapp.repository.database.local.db;
+package com.example.jobfinderapp.repository.local.db;
 
 import android.content.Context;
 
@@ -7,8 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.jobfinderapp.repository.database.local.dao.JobDao;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.dao.JobDao;
+import com.example.jobfinderapp.repository.local.entity.Result;
 import com.example.jobfinderapp.utils.Converter;
 
 @Database(entities = Result.class, version = 1, exportSchema = false)

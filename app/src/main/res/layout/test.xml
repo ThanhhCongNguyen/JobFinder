@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:fitsSystemWindows="false">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:collapsedTitleTextColor="@color/white"
+            app:contentScrim="@color/blue"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:title="Job Finder">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:title="Job Finder"
+                app:titleTextColor="@color/white"
+                app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/subConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/extraSpace"
+            android:background="@drawable/background_right_left_conner">
+
+            <View
+                android:id="@+id/v4"
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:background="@drawable/line"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/subConstraint" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="Marked Job"
+                android:textColor="@color/black"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/v4" />
+
+            <TextView
+                android:id="@+id/showAllMarkedJob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:text="Show All"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv5"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/tv5" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMarked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toBottomOf="@id/tv5" />
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="@string/recommended_job"
+                android:textColor="@color/black"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewMarked" />
+
+            <TextView
+                android:id="@+id/showAllRecommendedJob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:text="Show All"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv7"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/tv7" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv7"
+                app:shimmer_repeat_mode="restart"
+                app:shimmer_shape="radial">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_layout"></include>
+
+                    <include layout="@layout/shimmer_layout"></include>
+
+                    <include layout="@layout/shimmer_layout"></include>
+
+                    <include layout="@layout/shimmer_layout"></include>
+
+                    <include layout="@layout/shimmer_layout"></include>
+
+                    <include layout="@layout/shimmer_layout"></include>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRecommended"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/extraSpace"
+                app:layout_constraintBottom_toBottomOf="@+id/subConstraint"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toBottomOf="@id/tv7" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/subConstraint"
+                app:layout_constraintEnd_toEndOf="@id/subConstraint"
+                app:layout_constraintStart_toStartOf="@id/subConstraint"
+                app:layout_constraintTop_toTopOf="@id/subConstraint" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

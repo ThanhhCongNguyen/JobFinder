@@ -14,26 +14,8 @@
         android:background="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Recommended Job"
+        app:title="Marked Jobs"
         app:titleTextColor="@color/white" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/extraSpace"
-        android:text="Page"
-        android:textSize="@dimen/largeText"
-        app:layout_constraintBottom_toBottomOf="@id/spinner"
-        app:layout_constraintEnd_toStartOf="@id/spinner"
-        app:layout_constraintTop_toTopOf="@id/spinner" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginEnd="@dimen/extraSpace"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"
@@ -43,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:shimmer_repeat_mode="restart"
         app:shimmer_shape="radial">
 
@@ -73,18 +55,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/mediumSpace" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/mediumSpace" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

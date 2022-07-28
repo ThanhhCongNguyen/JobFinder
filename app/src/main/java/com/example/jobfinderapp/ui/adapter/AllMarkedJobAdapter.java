@@ -1,24 +1,24 @@
 package com.example.jobfinderapp.ui.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jobfinderapp.databinding.ItemAllRecommendedJobBinding;
+import com.example.jobfinderapp.databinding.ItemAllMarkedJobBinding;
 import com.example.jobfinderapp.repository.local.entity.Result;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AllMarkedJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Result> results;
     private Callback callback;
 
-    public AllJobAdapter(Callback callback) {
+    public AllMarkedJobAdapter(Callback callback) {
         this.results = new ArrayList<>();
         this.callback = callback;
     }
@@ -28,10 +28,16 @@ public class AllJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
+    public void deleteItem(Result result, int position) {
+        callback.deleteItem(result, position);
+        results.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemAllRecommendedJobBinding binding = ItemAllRecommendedJobBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemAllMarkedJobBinding binding = ItemAllMarkedJobBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new RecommendedViewHolder(binding);
     }
 
@@ -54,10 +60,6 @@ public class AllJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         recommendedViewHolder.itemView.setOnClickListener(view -> {
             callback.onItemClick(result);
         });
-
-        recommendedViewHolder.binding.save.setOnClickListener(view -> {
-            callback.saveJob(result, view);
-        });
     }
 
     @Override
@@ -65,18 +67,39 @@ public class AllJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return results != null ? results.size() : 0;
     }
 
+    public class RecommendedViewHolder extends RecyclerView.ViewHolder {
+        private ItemAllMarkedJobBinding binding;
+
+        public RecommendedViewHolder(@NonNull ItemAllMarkedJobBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
+
     public interface Callback {
         void onItemClick(Result result);
 
-        void saveJob(Result result, View view);
+        void deleteItem(Result result, int position);
     }
 
-    public class RecommendedViewHolder extends RecyclerView.ViewHolder {
-        private ItemAllRecommendedJobBinding binding;
+    public static class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+        private AllMarkedJobAdapter allMarkedJobAdapter;
 
-        public RecommendedViewHolder(@NonNull ItemAllRecommendedJobBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public SwipeToDeleteCallback(AllMarkedJobAdapter allMarkedJobAdapter) {
+            super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+            this.allMarkedJobAdapter = allMarkedJobAdapter;
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            Result result = allMarkedJobAdapter.results.get(position);
+            allMarkedJobAdapter.deleteItem(result, position);
         }
     }
 }

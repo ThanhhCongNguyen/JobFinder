@@ -1,4 +1,4 @@
-package com.example.jobfinderapp.repository.database.local.entity;
+package com.example.jobfinderapp.repository.local.entity;
 
 import androidx.room.Entity;
 

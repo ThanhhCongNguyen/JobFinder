@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent"
+    android:id="@+id/parent1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
-    tools:context=".ui.activity.DetailActivity">
+    android:background="@color/blue">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/parent1"
+        app:layout_constraintTop_toTopOf="@id/parent1"
         app:title="Senior"
         app:titleTextColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background_right_left_conner"
+        app:layout_constraintBottom_toBottomOf="@id/parent1"
+        app:layout_constraintEnd_toEndOf="@id/parent1"
+        app:layout_constraintStart_toStartOf="@id/parent1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/extraSpace"
         android:background="@drawable/item_recommended_background"
-        app:layout_constraintBottom_toBottomOf="@id/parent"
+        app:layout_constraintBottom_toTopOf="@id/applyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -32,6 +43,7 @@
             android:id="@+id/subConstraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/extraSpace"
             android:background="@drawable/background_right_left_conner">
 
             <View
@@ -90,6 +102,7 @@
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:layout_marginEnd="@dimen/extraSpace"
+                android:layout_marginBottom="@dimen/extraSpace"
                 app:cardCornerRadius="@dimen/mediumRadius"
                 app:layout_constraintEnd_toEndOf="@id/subConstraint"
                 app:layout_constraintStart_toStartOf="@id/subConstraint"
@@ -170,23 +183,21 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <Button
-                android:id="@+id/applyButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/largeSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/largeSpace"
-                android:layout_marginBottom="@dimen/extraSpace"
-                android:background="@drawable/apply_background"
-                android:text="Apply Now"
-                app:backgroundTint="@null"
-                app:layout_constraintBottom_toBottomOf="@id/subConstraint"
-                app:layout_constraintEnd_toEndOf="@id/subConstraint"
-                app:layout_constraintStart_toStartOf="@id/subConstraint"
-                app:layout_constraintTop_toBottomOf="@id/cardView" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/largeSpace"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:layout_marginEnd="@dimen/largeSpace"
+        android:layout_marginBottom="@dimen/extraSpace"
+        android:background="@drawable/apply_background"
+        android:text="Apply Now"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@id/parent1"
+        app:layout_constraintEnd_toEndOf="@id/parent1"
+        app:layout_constraintStart_toStartOf="@id/parent1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

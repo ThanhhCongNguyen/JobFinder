@@ -1,4 +1,4 @@
-package com.example.jobfinderapp.repository.database.remote;
+package com.example.jobfinderapp.repository.remote;
 
 import com.example.jobfinderapp.utils.Constants;
 

@@ -5,29 +5,19 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.example.jobfinderapp.repository.JobRepository;
-import com.example.jobfinderapp.repository.local.entity.Job;
 import com.example.jobfinderapp.repository.local.entity.Result;
 import com.example.jobfinderapp.ui.base.BaseViewModel;
 
 import java.util.List;
 
-public class JobViewModel extends BaseViewModel {
+public class AllMarkedJobViewModel extends BaseViewModel {
     private JobRepository repository;
-    private List<Result> results;
 
-    public JobViewModel() {
+    public AllMarkedJobViewModel() {
     }
 
     public void initRepository(Context context) {
         repository = new JobRepository(context);
-    }
-
-    public LiveData<Job> getJob(String appId, String appKey) {
-        return repository.getJob(appId, appKey);
-    }
-
-    public LiveData<Job> search(String appId, String appKey, String resultPerPage, String what, String contentType) {
-        return repository.search(appId, appKey, resultPerPage, what, contentType);
     }
 
     public LiveData<List<Result>> getLiveData() {
@@ -40,13 +30,5 @@ public class JobViewModel extends BaseViewModel {
 
     public void delete(Result result) {
         repository.deleteJob(result);
-    }
-
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.jobfinderapp.repository.database.local.dao;
+package com.example.jobfinderapp.repository.local.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 
 import java.util.List;
 

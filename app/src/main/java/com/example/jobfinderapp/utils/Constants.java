@@ -7,6 +7,6 @@ public final class Constants {
     public static final String RESULT_PER_PAGE = "20";
     public static final String CONTENT_TYPE = "application/json";
 
-    public static final String resultKey = "resultKey";
-    public static final int DELAY_MILLIS = 1000;
+    public static final String RESULT_KEY = "resultKey";
+    public static final int DELAY_MILLIS = 500;
 }

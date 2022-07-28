@@ -3,7 +3,10 @@ package com.example.jobfinderapp.ui.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,19 +14,21 @@ import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jobfinderapp.R;
 import com.example.jobfinderapp.databinding.ActivityMainBinding;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 import com.example.jobfinderapp.ui.adapter.MarkerJobAdapter;
 import com.example.jobfinderapp.ui.adapter.RecommendedJobAdapter;
 import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.utils.Constants;
 import com.example.jobfinderapp.utils.Utility;
 import com.example.jobfinderapp.viewmodel.JobViewModel;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends BaseActivity {
@@ -37,7 +42,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
+
+        initToolbar();
 
         jobViewModel = new ViewModelProvider(this).get(JobViewModel.class);
         jobViewModel.initRepository(getApplicationContext());
@@ -48,12 +54,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(Result result) {
                 DetailActivity.starter(MainActivity.this, result);
-            }
-
-            @Override
-            public void saveJob(Result result) {
-                executor.execute(() -> jobViewModel.insert(result));
-                Utility.toast(getApplicationContext(), "Save successfully");
             }
         });
 
@@ -66,15 +66,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void deleteItem(Result result, int position) {
                 executor.execute(() -> jobViewModel.delete(result));
-                Snackbar snackbar = Snackbar.make(binding.recyclerViewMarked, "Deleted", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        executor.execute(() -> jobViewModel.insert(result));
-                        markerJobAdapter.notifyItemInserted(position);
-                    }
-                });
-                snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
-                snackbar.show();
+                Utility.snackBar(getApplicationContext(), binding.getRoot(), "Deleted successfully");
             }
         });
 
@@ -86,6 +78,15 @@ public class MainActivity extends BaseActivity {
 
         binding.showAllRecommendedJob.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, AllJobActivity.class));
+        });
+
+        binding.showAllMarkedJob.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, AllMarkerJobActivity.class));
+        });
+
+        binding.searchAction.setOnClickListener(view -> {
+            String data = binding.searchEdittext.getText().toString().trim();
+            search(data);
         });
     }
 
@@ -106,12 +107,12 @@ public class MainActivity extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                search(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search(newText);
                 return false;
             }
         });
@@ -133,10 +134,13 @@ public class MainActivity extends BaseActivity {
             if (results.size() > 0) {
                 binding.tv5.setVisibility(View.VISIBLE);
                 binding.recyclerViewMarked.setVisibility(View.VISIBLE);
+                binding.showAllMarkedJob.setVisibility(View.VISIBLE);
                 markerJobAdapter.setResults(results);
+                jobViewModel.setResults(results);
             } else {
                 binding.tv5.setVisibility(View.GONE);
                 binding.recyclerViewMarked.setVisibility(View.GONE);
+                binding.showAllMarkedJob.setVisibility(View.GONE);
             }
         });
     }
@@ -162,12 +166,45 @@ public class MainActivity extends BaseActivity {
         jobViewModel.search(Constants.APP_ID, Constants.APP_KEY, Constants.RESULT_PER_PAGE, data, Constants.CONTENT_TYPE)
                 .observe(MainActivity.this, job -> {
                     if (job == null) {
-
+                        return;
                     }
                     binding.recyclerRecommended.setVisibility(View.VISIBLE);
                     binding.progressBar.setVisibility(View.GONE);
 
                     recommendedJobAdapter.setResults(job.getResults());
                 });
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+
+        binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+        binding.collapsingToolbar.setTitle("Job Finder");
+        binding.appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if ((binding.collapsingToolbar.getHeight() + verticalOffset) < (2 * ViewCompat.getMinimumHeight(binding.collapsingToolbar))) {
+                    binding.recyclerViewMarked.setVisibility(View.GONE);
+                    binding.tv5.setVisibility(View.GONE);
+                    binding.showAllMarkedJob.setVisibility(View.GONE);
+                    binding.toolbar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.toolbar.setVisibility(View.GONE);
+                    binding.toolbar.setVisibility(View.GONE);
+                    if (jobViewModel.getResults() != null) {
+                        if (jobViewModel.getResults().size() > 0) {
+                            binding.recyclerViewMarked.setVisibility(View.VISIBLE);
+                            binding.tv5.setVisibility(View.VISIBLE);
+                            binding.showAllMarkedJob.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.recyclerViewMarked.setVisibility(View.GONE);
+                            binding.tv5.setVisibility(View.GONE);
+                            binding.showAllMarkedJob.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            }
+        });
     }
 }

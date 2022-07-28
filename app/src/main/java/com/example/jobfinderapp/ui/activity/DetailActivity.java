@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.jobfinderapp.R;
 import com.example.jobfinderapp.databinding.ActivityDetailBinding;
-import com.example.jobfinderapp.repository.database.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Result;
 import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.utils.Constants;
 import com.example.jobfinderapp.viewmodel.DetailViewModel;
@@ -23,7 +23,7 @@ public class DetailActivity extends BaseActivity {
 
     public static void starter(Context context, Result result) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(Constants.resultKey, result);
+        intent.putExtra(Constants.RESULT_KEY, result);
         context.startActivity(intent);
     }
 
@@ -33,16 +33,13 @@ public class DetailActivity extends BaseActivity {
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        binding.toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        initToolBar();
 
         detailViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
 
         Intent intent = getIntent();
         if (intent != null) {
-            Result result = (Result) intent.getSerializableExtra(Constants.resultKey);
+            Result result = (Result) intent.getSerializableExtra(Constants.RESULT_KEY);
             if (result != null) {
                 detailViewModel.setResult(result);
 
@@ -69,5 +66,12 @@ public class DetailActivity extends BaseActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    private void initToolBar() {
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        binding.toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 }

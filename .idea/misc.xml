@@ -6,6 +6,7 @@
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/apply_background.xml" value="0.111" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/background_edittext.xml" value="0.1445" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/background_right_left_conner.xml" value="0.1445" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/background_search_icon_edittext.xml" value="0.126" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/full_time_background.xml" value="0.1445" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/ic_apartment.xml" value="0.1445" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/ic_location.xml" value="0.1445" />
@@ -18,14 +19,19 @@
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/save_background.xml" value="0.111" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/drawable/splash_screen.xml" value="0.1405" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_all_job.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_all_marker_job.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_detail.xml" value="0.1796875" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_main_1.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/activity_splash.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/dialog_progress.xml" value="0.1" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/item_all_marked_job.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/item_all_recommended_job.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/item_marked_job.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/item_progress.xml" value="0.1" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/item_recommended_job.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/shimmer_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/layout/test.xml" value="0.17916666666666667" />
         <entry key="..\:/AndroidIntern/JobFinderApp/app/src/main/res/menu/menu_main.xml" value="0.17916666666666667" />
       </map>
     </option>

@@ -1,6 +1,6 @@
-package com.example.jobfinderapp.repository.database.remote;
+package com.example.jobfinderapp.repository.remote;
 
-import com.example.jobfinderapp.repository.database.local.entity.Job;
+import com.example.jobfinderapp.repository.local.entity.Job;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
