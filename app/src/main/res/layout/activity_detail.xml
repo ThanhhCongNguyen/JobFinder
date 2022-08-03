@@ -54,7 +54,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:layout_marginStart="@dimen/mediumSpace"
+                android:layout_marginEnd="@dimen/mediumSpace"
+                android:background="@color/grey_light"
                 android:orientation="vertical">
 
                 <TextView
@@ -96,8 +98,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mediumSpace"
                 android:layout_marginTop="@dimen/mediumSpace"
-                android:background="@color/white"
+                android:layout_marginEnd="@dimen/mediumSpace"
+                android:background="@color/grey_light"
                 android:orientation="vertical">
 
                 <TextView
@@ -155,8 +159,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mediumSpace"
                 android:layout_marginTop="@dimen/mediumSpace"
-                android:background="@color/white"
+                android:layout_marginEnd="@dimen/mediumSpace"
+                android:background="@color/grey_light"
                 android:orientation="vertical">
 
                 <TextView
@@ -190,7 +196,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/mediumSpace"
         android:background="@drawable/apply_background"
         android:text="Apply Now"
         app:backgroundTint="@null"

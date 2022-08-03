@@ -1,10 +1,12 @@
 package com.example.jobfinderapp.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -71,9 +73,16 @@ public class SearchActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     binding.progressBar.setVisibility(View.VISIBLE);
-                    String data = binding.searchEdittext.getText().toString().trim();
-                    executor.execute(() -> searchViewModel.insertSearch(new Search(data)));
-                    search(data);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(binding.searchEdittext.getWindowToken(), 0);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            String data = binding.searchEdittext.getText().toString().trim();
+                            executor.execute(() -> searchViewModel.insertSearch(new Search(data)));
+                            search(data);
+                        }
+                    }, 1000);
                     return true;
                 }
                 return false;
