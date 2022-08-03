@@ -2,14 +2,11 @@ package com.example.jobfinderapp.ui.activity;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.jobfinderapp.R;
 import com.example.jobfinderapp.databinding.ActivityAllJobBinding;
@@ -47,35 +44,26 @@ public class AllJobActivity extends BaseActivity {
             @Override
             public void saveJob(Result result, View view) {
                 executor.execute(() -> allJobViewModel.insert(result));
-                Utility.snackBar(getApplicationContext(), binding.getRoot(), "Inserted successfully");
+                Utility.snackBar(getApplicationContext(), binding.parentA, "Inserted successfully");
             }
         });
 
         setUpRecyclerView();
-        observeDataChanged(allJobViewModel.getCurrentPage());
+        observeDataChanged(String.valueOf(allJobViewModel.getCurrentPage()));
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, allJobViewModel.getPages());
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.idNestedSV.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                binding.recyclerView.setVisibility(View.GONE);
-                binding.shimmerLayout.setVisibility(View.VISIBLE);
-                binding.shimmerLayout.startShimmer();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        observeDataChanged(String.valueOf(i));
-                    }
-                }, Constants.DELAY_MILLIS);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                int currentPage = allJobViewModel.getCurrentPage();
+                binding.loadMore.setVisibility(View.VISIBLE);
+                if (currentPage < 20) {
+                    binding.loadMore.setOnClickListener(view -> {
+                        loadMore(String.valueOf(currentPage));
+                        allJobViewModel.setCurrentPage();
+                    });
+                }
             }
         });
-        binding.spinner.setAdapter(adapter);
     }
 
     @Override
@@ -99,6 +87,18 @@ public class AllJobActivity extends BaseActivity {
             binding.shimmerLayout.stopShimmer();
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.VISIBLE);
+        });
+    }
+
+    private void loadMore(String page) {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.loadMore.setVisibility(View.GONE);
+        allJobViewModel.getJobByPage(page, Constants.APP_ID, Constants.APP_KEY).observe(this, job -> {
+            if (job == null) {
+                return;
+            }
+            allJobAdapter.addMoreResults(job.getResults());
+            binding.progressBar.setVisibility(View.GONE);
         });
     }
 

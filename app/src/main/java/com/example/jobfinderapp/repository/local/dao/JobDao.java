@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.jobfinderapp.repository.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Search;
 
 import java.util.List;
 
@@ -21,4 +22,13 @@ public interface JobDao {
 
     @Query("SELECT * FROM result LIMIT 10")
     LiveData<List<Result>> getLiveData();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertSearch(Search search);
+
+    @Delete()
+    void deleteSearch(Search search);
+
+    @Query("SELECT * FROM search LIMIT 10")
+    LiveData<List<Search>> getSearchLiveData();
 }

@@ -42,11 +42,6 @@ public class RecommendedJobAdapter extends RecyclerView.Adapter<RecommendedJobAd
             holder.binding.companyName.setText(result.getCompany().getDisplayName());
             holder.binding.location.setText(result.getLocation().getDisplayName());
 
-            String isFullTime = result.getContractTime();
-            if (isFullTime == null) {
-                isFullTime = "No Data";
-            }
-            holder.binding.fullTimeText.setText(isFullTime);
             String created = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(result.getCreated());
             holder.binding.createdText.setText(created);
 

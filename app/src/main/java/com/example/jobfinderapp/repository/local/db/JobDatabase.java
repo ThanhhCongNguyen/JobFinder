@@ -9,9 +9,10 @@ import androidx.room.TypeConverters;
 
 import com.example.jobfinderapp.repository.local.dao.JobDao;
 import com.example.jobfinderapp.repository.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Search;
 import com.example.jobfinderapp.utils.Converter;
 
-@Database(entities = Result.class, version = 1, exportSchema = false)
+@Database(entities = {Result.class, Search.class}, version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class JobDatabase extends RoomDatabase {
     private static JobDatabase instance;

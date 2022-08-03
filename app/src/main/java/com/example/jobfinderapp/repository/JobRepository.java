@@ -9,6 +9,7 @@ import com.example.jobfinderapp.repository.local.dao.JobDao;
 import com.example.jobfinderapp.repository.local.db.JobDatabase;
 import com.example.jobfinderapp.repository.local.entity.Job;
 import com.example.jobfinderapp.repository.local.entity.Result;
+import com.example.jobfinderapp.repository.local.entity.Search;
 import com.example.jobfinderapp.repository.remote.ApiInterface;
 import com.example.jobfinderapp.repository.remote.RetrofitInstance;
 
@@ -41,6 +42,17 @@ public class JobRepository {
         jobDao.delete(result);
     }
 
+    public LiveData<List<Search>> getSearchLiveData() {
+        return jobDao.getSearchLiveData();
+    }
+
+    public void insertSearch(Search search) {
+        jobDao.insertSearch(search);
+    }
+
+    public void deleteSearch(Search search) {
+        jobDao.deleteSearch(search);
+    }
 
     public LiveData<Job> getJob(String appId, String appKey) {
         final MutableLiveData<Job> data = new MutableLiveData<>();

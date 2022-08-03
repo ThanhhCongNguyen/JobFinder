@@ -3,8 +3,10 @@ package com.example.jobfinderapp.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
@@ -17,16 +19,11 @@ public class Utility {
     }
 
     public static void snackBar(Context context, View view, String message) {
-        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(ContextCompat.getColor(context, R.color.blue));
-        snackbar.show();
-
-//        Snackbar snackbar = Snackbar.make(view, "Test", Snackbar.LENGTH_LONG);
-//        Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-//        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams)
-//                snackbarLayout.getLayoutParams();
-//        layoutParams.setMargins(32, 0, 32, 32);
-//        snackbarLayout.setLayoutParams(layoutParams);
-//        snackbar.show();
+        Snackbar snackBar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) snackBar.getView().getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, 0);
+        snackBar.getView().setBackgroundColor(context.getResources().getColor(R.color.black));
+        snackBar.getView().setLayoutParams(layoutParams);
+        snackBar.show();
     }
 }

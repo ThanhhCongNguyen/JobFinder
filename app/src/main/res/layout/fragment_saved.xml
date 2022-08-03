@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_dark"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:text="@string/your_favorite_job"
+        android:textColor="@color/black"
+        android:textSize="@dimen/largeText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/parent1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:src="@drawable/job"
+        app:layout_constraintBottom_toBottomOf="@id/parent1"
+        app:layout_constraintEnd_toEndOf="@id/parent1"
+        app:layout_constraintStart_toStartOf="@id/parent1"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

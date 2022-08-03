@@ -16,184 +16,181 @@
         app:title="Senior"
         app:titleTextColor="@color/white" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/parent2"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/background_right_left_conner"
-        app:layout_constraintBottom_toBottomOf="@id/parent1"
-        app:layout_constraintEnd_toEndOf="@id/parent1"
-        app:layout_constraintStart_toStartOf="@id/parent1"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/extraSpace"
-        android:background="@drawable/item_recommended_background"
-        app:layout_constraintBottom_toTopOf="@id/applyButton"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/subConstraint"
+        <View
+            android:id="@+id/view"
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:background="@drawable/line" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/extraSpace"
+        app:layout_constraintBottom_toTopOf="@id/applyButton"
+        app:layout_constraintEnd_toEndOf="@id/parent1"
+        app:layout_constraintStart_toStartOf="@id/parent1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/extraSpace"
-            android:background="@drawable/background_right_left_conner">
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="100dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="@dimen/mediumSpace"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="@id/subConstraint"
-                app:layout_constraintStart_toStartOf="@id/subConstraint"
-                app:layout_constraintTop_toTopOf="@id/subConstraint" />
-
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:gravity="center"
-                android:text="Title"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/extraExtraLargeText"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/view"
-                app:layout_constraintStart_toStartOf="@id/view"
-                app:layout_constraintTop_toBottomOf="@id/view" />
-
-            <TextView
-                android:id="@+id/companyName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/mediumSpace"
-                android:text="Company Name"
-                android:textSize="@dimen/extraLargeText"
-                app:layout_constraintEnd_toEndOf="@id/title"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/title" />
-
-            <TextView
-                android:id="@+id/isFullTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/mediumSpace"
-                android:background="@drawable/full_time_background"
-                android:paddingStart="@dimen/extraSpace"
-                android:paddingEnd="@dimen/extraSpace"
-                android:text="Full time"
-                app:layout_constraintEnd_toEndOf="@id/companyName"
-                app:layout_constraintStart_toStartOf="@+id/companyName"
-                app:layout_constraintTop_toBottomOf="@id/companyName" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:layout_marginBottom="@dimen/extraSpace"
-                app:cardCornerRadius="@dimen/mediumRadius"
-                app:layout_constraintEnd_toEndOf="@id/subConstraint"
-                app:layout_constraintStart_toStartOf="@id/subConstraint"
-                app:layout_constraintTop_toBottomOf="@id/isFullTime">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/extraSpace"
+                    android:layout_marginTop="@dimen/extraSpace"
+                    android:text="Position"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/extraLargeText" />
 
-                    <TextView
-                        android:id="@+id/tv9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/extraSpace"
-                        android:layout_marginTop="@dimen/extraSpace"
-                        android:text="Information"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/largeText"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginEnd="@dimen/extraSpace"
+                    android:text="abc"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/largeText" />
 
-                    <TextView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/extraSpace"
-                        android:layout_marginTop="@dimen/extraSpace"
-                        android:drawableStart="@drawable/ic_location"
-                        android:drawablePadding="@dimen/extraSpace"
-                        android:gravity="center_vertical"
-                        android:text="HaNoi" />
+                <TextView
+                    android:id="@+id/isFullTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginBottom="@dimen/mediumSpace"
+                    android:background="@color/white_dark"
+                    android:padding="@dimen/smallSpace"
+                    android:paddingStart="@dimen/mediumSpace"
+                    android:paddingEnd="@dimen/mediumSpace"
+                    android:text="Full time"
+                    android:textSize="@dimen/smallText" />
 
-                    <TextView
-                        android:id="@+id/salary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/extraSpace"
-                        android:layout_marginTop="@dimen/mediumSpace"
-                        android:drawableStart="@drawable/ic_money"
-                        android:drawablePadding="@dimen/extraSpace"
-                        android:gravity="center_vertical"
-                        android:text="100"
-                        android:textSize="@dimen/extraSpace" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/createdText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/extraSpace"
-                        android:layout_marginTop="@dimen/mediumSpace"
-                        android:drawableStart="@drawable/ic_time"
-                        android:drawablePadding="@dimen/extraSpace"
-                        android:gravity="center_vertical"
-                        android:text="2022" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/extraSpace"
+                    android:layout_marginTop="@dimen/extraSpace"
+                    android:text="Information"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/extraLargeText" />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginEnd="@dimen/extraSpace"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="@dimen/mediumSpace"
+                    android:text="Location"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/largeText" />
+
+                <TextView
+                    android:id="@+id/salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginEnd="@dimen/extraSpace"
+                    android:drawableStart="@drawable/ic_money"
+                    android:drawablePadding="@dimen/mediumSpace"
+                    android:text="Salary"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/largeText" />
+
+                <TextView
+                    android:id="@+id/createdAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginEnd="@dimen/extraSpace"
+                    android:layout_marginBottom="@dimen/extraSpace"
+                    android:drawableStart="@drawable/ic_time"
+                    android:drawablePadding="@dimen/mediumSpace"
+                    android:text="2022/10/10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/largeText" />
 
 
-                    <TextView
-                        android:id="@+id/jobDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/extraSpace"
-                        android:layout_marginTop="@dimen/extraSpace"
-                        android:text="Job Description"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/largeText"
-                        android:textStyle="bold" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/largeSpace"
-                        android:layout_marginTop="@dimen/extraSpace"
-                        android:layout_marginEnd="@dimen/extraSpace"
-                        android:layout_marginBottom="@dimen/extraSpace"
-                        android:text="..."
-                        android:textSize="@dimen/largeText" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-            </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/extraSpace"
+                    android:layout_marginTop="@dimen/extraSpace"
+                    android:text="Job Description"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/extraLargeText" />
+
+                <TextView
+                    android:id="@+id/jobDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/largeSpace"
+                    android:layout_marginTop="@dimen/mediumSpace"
+                    android:layout_marginEnd="@dimen/extraSpace"
+                    android:layout_marginBottom="@dimen/extraSpace"
+                    android:text="abc"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/largeText" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/applyButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/largeSpace"
-        android:layout_marginTop="@dimen/extraSpace"
-        android:layout_marginEnd="@dimen/largeSpace"
-        android:layout_marginBottom="@dimen/extraSpace"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/mediumSpace"
         android:background="@drawable/apply_background"
         android:text="Apply Now"
         app:backgroundTint="@null"

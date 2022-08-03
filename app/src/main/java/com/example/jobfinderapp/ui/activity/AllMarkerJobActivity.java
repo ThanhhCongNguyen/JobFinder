@@ -1,13 +1,12 @@
 package com.example.jobfinderapp.ui.activity;
 
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jobfinderapp.R;
 import com.example.jobfinderapp.databinding.ActivityAllMarkerJobBinding;
@@ -16,7 +15,6 @@ import com.example.jobfinderapp.ui.adapter.AllMarkedJobAdapter;
 import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.utils.Utility;
 import com.example.jobfinderapp.viewmodel.AllMarkedJobViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 public class AllMarkerJobActivity extends BaseActivity {
     private AllMarkedJobViewModel allMarkedJobViewModel;

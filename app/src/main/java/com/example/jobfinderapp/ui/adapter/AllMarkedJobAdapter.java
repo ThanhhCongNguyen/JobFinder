@@ -49,11 +49,6 @@ public class AllMarkedJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         recommendedViewHolder.binding.title.setText(result.getTitle());
         recommendedViewHolder.binding.location.setText(result.getLocation().getDisplayName());
 
-        String isFullTime = result.getContractTime();
-        if (isFullTime == null) {
-            isFullTime = "No Data";
-        }
-        recommendedViewHolder.binding.fullTimeText.setText(isFullTime);
         String created = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(result.getCreated());
         recommendedViewHolder.binding.createdText.setText(created);
 

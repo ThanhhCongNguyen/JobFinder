@@ -14,11 +14,8 @@ import java.util.List;
 
 public class AllJobViewModel extends BaseViewModel {
     private JobRepository repository;
-    private String currentPage = "1";
-    private Boolean isLastPage = false;
-    private Boolean isLoading = false;
+    private int currentPage = 1;
     private List<Result> results;
-    private String[] pages = {"1", "2", "3", "4", "5", "6"};
 
     public AllJobViewModel() {
     }
@@ -36,12 +33,12 @@ public class AllJobViewModel extends BaseViewModel {
         repository.insertJob(result);
     }
 
-    public String getCurrentPage() {
+    public int getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
+    public void setCurrentPage() {
+        currentPage++;
     }
 
     public List<Result> getResults() {
@@ -52,7 +49,4 @@ public class AllJobViewModel extends BaseViewModel {
         this.results = results;
     }
 
-    public String[] getPages() {
-        return pages;
-    }
 }

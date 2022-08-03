@@ -45,13 +45,13 @@ public class DetailActivity extends BaseActivity {
 
                 binding.toolbar.setTitle(result.getTitle());
                 binding.title.setText(result.getTitle());
-                binding.companyName.setText(result.getCompany().getDisplayName());
+                binding.toolbar.setTitle(result.getCompany().getDisplayName());
                 binding.location.setText(result.getLocation().getDisplayName());
                 binding.salary.setText((int) result.getSalaryMin() + " / " + (int) result.getSalaryMax());
                 String created = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(result.getCreated());
-                binding.createdText.setText(created);
+                binding.createdAt.setText(created);
                 binding.isFullTime.setText(result.getContractTime());
-                binding.description.setText(result.getDescription());
+                binding.jobDescription.setText(result.getDescription());
             }
         }
 
