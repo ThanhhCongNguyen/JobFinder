@@ -98,8 +98,7 @@
                         android:text="Full time"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/smallText"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/largeText" />
 
                 </LinearLayout>
 

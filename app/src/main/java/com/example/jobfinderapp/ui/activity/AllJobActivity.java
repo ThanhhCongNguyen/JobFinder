@@ -2,6 +2,8 @@ package com.example.jobfinderapp.ui.activity;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.widget.NestedScrollView;
@@ -55,13 +57,17 @@ public class AllJobActivity extends BaseActivity {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 int currentPage = allJobViewModel.getCurrentPage();
-                binding.loadMore.setVisibility(View.VISIBLE);
-                if (currentPage < 20) {
-                    binding.loadMore.setOnClickListener(view -> {
-                        loadMore(String.valueOf(currentPage));
-                        allJobViewModel.setCurrentPage();
-                    });
+                if (v.getChildAt(0).getBottom() <= (binding.idNestedSV.getHeight() + scrollY)) {
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadMore(String.valueOf(currentPage));
+                            allJobViewModel.setCurrentPage();
+                        }
+                    }, 2000);
                 }
+
             }
         });
     }
@@ -91,7 +97,6 @@ public class AllJobActivity extends BaseActivity {
     }
 
     private void loadMore(String page) {
-        binding.progressBar.setVisibility(View.VISIBLE);
         binding.loadMore.setVisibility(View.GONE);
         allJobViewModel.getJobByPage(page, Constants.APP_ID, Constants.APP_KEY).observe(this, job -> {
             if (job == null) {

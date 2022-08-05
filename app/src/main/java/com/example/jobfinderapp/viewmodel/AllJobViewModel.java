@@ -49,4 +49,8 @@ public class AllJobViewModel extends BaseViewModel {
         this.results = results;
     }
 
+    public void addMoreResults(List<Result> results) {
+        this.results.addAll(results);
+    }
+
 }

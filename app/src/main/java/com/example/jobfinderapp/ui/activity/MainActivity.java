@@ -17,12 +17,15 @@ import com.example.jobfinderapp.ui.fragment.HomeFragment;
 import com.example.jobfinderapp.ui.fragment.SavedFragment;
 import com.example.jobfinderapp.utils.Utility;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import okhttp3.internal.Util;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
     private long backPressedTime;
-    private Toast backToast;
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,10 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         if (binding.bottomNavigation.getSelectedItemId() == R.id.home) {
             if (backPressedTime + 2000 > System.currentTimeMillis()) {
-                backToast.cancel();
                 super.onBackPressed();
                 return;
             } else {
-                backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
-                backToast.show();
+                Utility.snackBar(this, binding.getRoot(), getResources().getString(R.string.press_back));
             }
             backPressedTime = System.currentTimeMillis();
         } else {

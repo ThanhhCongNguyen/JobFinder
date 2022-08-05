@@ -2,14 +2,12 @@ package com.example.jobfinderapp.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +25,6 @@ import com.example.jobfinderapp.ui.activity.SearchActivity;
 import com.example.jobfinderapp.ui.adapter.RecommendedJobAdapter;
 import com.example.jobfinderapp.ui.base.BaseFragment;
 import com.example.jobfinderapp.utils.Constants;
-import com.example.jobfinderapp.utils.Utility;
 import com.example.jobfinderapp.viewmodel.JobViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
