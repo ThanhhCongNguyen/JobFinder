@@ -1,7 +1,10 @@
 package com.example.jobfinderapp.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,11 +15,14 @@ import com.example.jobfinderapp.databinding.ActivityMainBinding;
 import com.example.jobfinderapp.ui.base.BaseActivity;
 import com.example.jobfinderapp.ui.fragment.HomeFragment;
 import com.example.jobfinderapp.ui.fragment.SavedFragment;
+import com.example.jobfinderapp.utils.Utility;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +30,26 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initMenu();
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         loadFragment(new HomeFragment());
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.bottomNavigation.getSelectedItemId() == R.id.home) {
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                backToast.cancel();
+                super.onBackPressed();
+                return;
+            } else {
+                backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+                backToast.show();
+            }
+            backPressedTime = System.currentTimeMillis();
+        } else {
+            binding.bottomNavigation.setSelectedItemId(R.id.home);
+            loadFragment(new HomeFragment());
+        }
     }
 
     private void initMenu() {
@@ -51,7 +75,7 @@ public class MainActivity extends BaseActivity {
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameLayout, fragment);
-        transaction.addToBackStack(null);
+     //   transaction.addToBackStack(null);
         transaction.commit();
     }
 }

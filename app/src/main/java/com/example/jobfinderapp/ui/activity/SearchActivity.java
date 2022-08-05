@@ -3,6 +3,8 @@ package com.example.jobfinderapp.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -67,25 +69,50 @@ public class SearchActivity extends BaseActivity {
         observeSearchData();
 
         setUpDataRecyclerView();
+//
+//        binding.searchEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    binding.progressBar.setVisibility(View.VISIBLE);
+//                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(binding.searchEdittext.getWindowToken(), 0);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            String data = binding.searchEdittext.getText().toString().trim();
+//                            executor.execute(() -> searchViewModel.insertSearch(new Search(data)));
+//                            search(data);
+//                        }
+//                    }, 1000);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
-        binding.searchEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        binding.searchEdittext.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(binding.searchEdittext.getWindowToken(), 0);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            String data = binding.searchEdittext.getText().toString().trim();
-                            executor.execute(() -> searchViewModel.insertSearch(new Search(data)));
-                            search(data);
-                        }
-                    }, 1000);
-                    return true;
-                }
-                return false;
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.progressBar.setVisibility(View.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(binding.searchEdittext.getWindowToken(), 0);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        search(charSequence.toString());
+                    }
+                }, Constants.DELAY_MILLIS);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
